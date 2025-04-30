@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">{{ title }}</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        {% if galleries %}
+        <div class="mb-3">
+            <h5>Existing Gallery Images</h5>
+            <div class="row">
+                {% for image in galleries %}
+                <div class="col-md-3 mb-2">
+                    <img src="{{ image.image.url }}" class="img-thumbnail" style="height: 100px; object-fit: cover;">
+                    <!-- Optional: Add delete option later -->
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{% url 'vendor_dashboard' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

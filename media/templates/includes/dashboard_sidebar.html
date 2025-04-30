@@ -1,0 +1,31 @@
+<aside class="col-md-3">
+    <!--   SIDEBAR   -->
+    <ul class="list-group">
+        <a class="list-group-item {% if 'dashboard' in request.path %}active{% endif %}" href="{% url 'dashboard' %}">
+            Dashboard </a>
+
+        {% if request.user.role == 'Vendor' %}
+        <a class="list-group-item {% if request.path == '/store/vendor/orders/' %}active{% endif %}"
+            href="{% url 'vendor_order_list' %}"> Received Orders </a>
+        {% elif request.user.role == 'Customer' %}
+        <a class="list-group-item {% if '/my_orders/' in request.path %}active{% endif %}" href="{% url 'my_orders' %}">
+            My Orders </a>
+        {% endif %}
+
+        {% if request.user.role == 'Vendor' %}
+        <a class="list-group-item {% if '/out-of-stock/' in request.path %}active{% endif %}"
+            href="{% url 'out_of_stock_products' %}"> Out of Stock Items </a>
+
+        <a class="list-group-item {% if request.path == '/store/vendor/products/' %}active{% endif %}"
+            href="{% url 'vendor_product_list' %}"> View Products </a>
+        {% endif %}
+        <a class="list-group-item {% if '/edit_profile/' in request.path %}active{% endif %}"
+            href="{% url 'edit_profile' %}"> Edit Profile </a>
+        <a class="list-group-item {% if '/change_password/' in request.path %}active{% endif %}"
+            href="{% url 'change_password' %}"> Change Password </a>
+    </ul>
+    <br>
+    <a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Log
+            out</span> </a>
+    <!--   SIDEBAR .//END   -->
+</aside>

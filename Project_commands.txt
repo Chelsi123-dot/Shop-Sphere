@@ -1,0 +1,13 @@
+(Project setup) =============================================
+
+to create virtual env ==> python -m venv venv
+to activate virtual env ==> venv\Scripts\activate
+to install required package ==> pip install -r requirements.txt
+
+(to run project) ============================================
+open cmd on project directory 
+to activate virtual env ==> venv\Scripts\activate
+to run project ==> python manage.py runserver
+
+
+

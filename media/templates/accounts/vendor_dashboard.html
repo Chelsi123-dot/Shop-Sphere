@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section-conten padding-y bg">
+    {% include 'includes/alerts.html' %}
+
+    <div class="container">
+        <div class="row">
+            {% include 'includes/dashboard_sidebar.html' %}
+
+            <main class="col-md-9">
+                <article class="card">
+                    <header class="card-header">
+                        <strong class="d-inline-block mr-3">Logged in as Vendor:</strong>
+                        <span>{{ user.full_name }}</span>
+                    </header>
+
+                    <div class="card-body">
+                        <div class="row">
+
+                            <!-- Total Products -->
+                            <div class="col-md-4">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h5 class="card-title">My Products</h5>
+                                        <h4>{{ products.count }}</h4>
+                                        <a href="{% url 'vendor_product_list' %}">View Products</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Total Orders -->
+                            <div class="col-md-4">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Total Orders</h5>
+                                        <h4>{{ orders.count }}</h4>
+                                        <a href="{% url 'vendor_order_list' %}">View Orders</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Total Sales -->
+                            <div class="col-md-4">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Total Sales</h5>
+                                        <h4>${{ total_sales.total|default:"0.00"|floatformat:2 }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Profile Info -->
+                        <div class="row mt-4">
+                            <div class="col-md-6 offset-md-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        {% if userprofile.profile_picture %}
+                                        <img src="{{ userprofile.profile_picture.url }}" alt="Vendor Profile Picture"
+                                            width="60" height="60" style="border-radius: 50%;">
+                                        {% else %}
+                                        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Default Avatar"
+                                            width="60" height="60" style="border-radius: 50%;">
+                                        {% endif %}
+                                        <p class="mb-0 mt-2">{{ user.email }}</p>
+                                        <p>{{ user.phone_number }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </article>
+            </main>
+        </div>
+    </div>
+</section>
+{% endblock %}
